@@ -54,7 +54,7 @@ const StudentSchema = new Schema<TStudent, StudentModel>(
     user: {
       type: Schema.Types.ObjectId,
       required:[true,'user id must be provided'],
-      unique: true,
+      // unique: true,
       ref:'User',
     },
    
@@ -80,6 +80,7 @@ const StudentSchema = new Schema<TStudent, StudentModel>(
     },
     email: {
       type: "string",
+      unique: true,
       required: true,
       validate: {
         validator: (value: string) => {
@@ -101,6 +102,11 @@ const StudentSchema = new Schema<TStudent, StudentModel>(
       type: "boolean",
       default: false,
     },
+    admissionSemester:{
+      type: Schema.Types.ObjectId,
+      ref:'AcademicSemister',
+      
+    }
   },
   {
     toJSON: {

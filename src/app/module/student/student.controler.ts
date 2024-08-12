@@ -12,7 +12,7 @@ const getAllStudent = catchAsync(async (req, res, next) => {
   SendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "get all Student successfully",
+    message: "get all Student successfullyyyy",
     data: result,
   });
 });
@@ -24,7 +24,7 @@ const getsingleStudent = catchAsync(async (req, res, next) => {
   SendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "get single Student successfully",
+    message: "get single Student successfullyy",
     data: result,
   });
 });

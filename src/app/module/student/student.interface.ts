@@ -17,7 +17,7 @@ export type TUserName = {
 
 export type TStudent = {
   id: string;
-  user:Types.ObjectId;
+  user:Types.ObjectId; // connect to user id
   password: string;
   name: TUserName;
   gender: "male" | "female";
@@ -30,7 +30,7 @@ export type TStudent = {
   permanentAddress?: string;
   guardian: TGuardian;
   profileImg?: string;
-
+  admissionSemester: Types.ObjectId; // connect to academicsemester id
  
   isDeleted:boolean
 };
