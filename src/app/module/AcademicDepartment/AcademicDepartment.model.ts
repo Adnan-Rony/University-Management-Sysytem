@@ -24,6 +24,20 @@ academicDepartment.pre("save", async function (next) {
   next();
 });
 
+//buji nai
+// class AppError extends Error{
+//   public statusCode: number;
+// }
+
+
+
+
+
+
+
+
+
+
 academicDepartment.pre("findOneAndUpdate", async function (next) {
   const query = this.getQuery();
   console.log(query);

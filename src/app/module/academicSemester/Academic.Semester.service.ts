@@ -40,13 +40,12 @@ const updateAcademicSemester = async (
   ) {
     throw new Error("Invalid semester code");
   }
-  const result=await AcademicSemesterModel.findOneAndUpdate({_id:id},payload,{ new:true
-  })
+  const result = await AcademicSemesterModel.findOneAndUpdate(
+    { _id: id },
+    payload,
+    { new: true }
+  );
   return result;
-
-
-
-
 };
 
 export const AcademicSemesterService = {

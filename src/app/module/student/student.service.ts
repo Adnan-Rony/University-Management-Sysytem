@@ -3,7 +3,7 @@ import { Student } from "./student.model";
 
 const getStudentintoDB = async () => {
   const result = await Student.find().populate
-  ("admissionSemester") .populate({
+  ("AcademicSemister") .populate({
     path: "academicDepartment",
     populate:{
       path: "academicFaculty",
@@ -15,7 +15,7 @@ const getStudentintoDB = async () => {
 
 const getsingleStudentIntoDB = async (id: String) => {
   const result = await Student.findById(id).populate
-  ("admissionSemester") .populate({
+  ("AcademicSemister") .populate({
     path: "academicDepartment",
     populate:{
       path: "academicFaculty",

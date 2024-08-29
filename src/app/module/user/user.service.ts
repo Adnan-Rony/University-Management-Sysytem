@@ -5,6 +5,7 @@ import { Student } from "../student/student.model";
 import { AcademicSemesterModel } from "../academicSemester/AcademicSemester.model";
 import { TStudent } from "../student/student.interface";
 import { generateStudentId } from "./user.util";
+import mongoose from "mongoose";
 
 const createStudentIntoDB = async (password: string, payLoad: TStudent) => {
   // Create a user object
@@ -16,28 +17,55 @@ const createStudentIntoDB = async (password: string, payLoad: TStudent) => {
 
   // Find academic semester info
   const admissionSemester = await AcademicSemesterModel.findById(
-    payLoad.admissionSemester
+    payLoad.AcademicSemister
   );
 
   if (!admissionSemester) {
     throw new Error("Admission semester not found");
   }
+
+
+
+
+
+  const startSession=await mongoose.startSession();
+
+
+
+
+
+
+
+
+  try {
+    // Generate a student ID using the admission semester info
+    userData.id = await generateStudentId(admissionSemester);
+
+    // Create a user
+    const newUser = await UserModel.create(userData);
+
+    // Create a student
+    // User is ID
+    if (Object.keys(newUser).length) {
+      payLoad.id = newUser.id;
+      payLoad.user = newUser._id; // ref id
+
+      const newStudent = await Student.create(payLoad);
+      return newStudent;
+    }
+  } 
   
+  
+  
+  
+  
+  
+  
+  catch (err) {
 
-  // Generate a student ID using the admission semester info
-  userData.id = await generateStudentId(admissionSemester);
 
-  // Create a user
-  const newUser = await UserModel.create(userData);
 
-  // Create a student
-  // User is ID
-  if (Object.keys(newUser).length) {
-    payLoad.id = newUser.id;
-    payLoad.user = newUser._id; // ref id
 
-    const newStudent = await Student.create(payLoad);
-    return newStudent;
   }
 };
 

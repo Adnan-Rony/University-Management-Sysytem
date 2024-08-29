@@ -30,7 +30,7 @@ export type TStudent = {
   permanentAddress?: string;
   guardian: TGuardian;
   profileImg?: string;
-  admissionSemester: Types.ObjectId; // connect to academicsemester id
+  AcademicSemister: Types.ObjectId; // connect to academicsemester id
   academicDepartment: Types.ObjectId; // connect to academicDepartment id
  
   isDeleted:boolean

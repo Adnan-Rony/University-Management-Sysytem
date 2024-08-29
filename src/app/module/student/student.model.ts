@@ -102,7 +102,7 @@ const StudentSchema = new Schema<TStudent, StudentModel>(
       type: "boolean",
       default: false,
     },
-    admissionSemester:{
+    AcademicSemister:{
       type: Schema.Types.ObjectId,
       ref:'AcademicSemister',
       
