@@ -10,6 +10,7 @@ const router = express.Router();
 router.get("/:studentid",StudentControllers.getsingleStudent)
 router.delete("/:studentid",StudentControllers.DeleteStudent)
 router.get("/",StudentControllers.getAllStudent)
+router.patch("/",StudentControllers.UpdateStudent)
 
 
 

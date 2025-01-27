@@ -24,6 +24,7 @@ const allacademicSemestersIntoDb = async () => {
   console.log("Fetched Semesters:", result);
   return result;
 };
+
 const getSingleAcademicSemester = async (id: string) => {
   const result = await AcademicSemesterModel.findById(id);
   return result;
