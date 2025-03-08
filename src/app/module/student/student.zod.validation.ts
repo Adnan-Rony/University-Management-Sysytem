@@ -55,7 +55,36 @@ const CreateStudentValidationSchema = z.object({
     }),
   }),
 });
+const updateStudentValidationSchema = z.object({
+  body: z.object({
+    student: z.object({
+      name: userNameValidationSchema,
+      gender: z.enum(["male", "female"], {
+        errorMap: () => ({ message: "Gender must be female or male" }),
+      }),
+      dateOfBirth: z.string().optional().optional(),
+      contactNumber: z.string().nonempty("contactNumber is required").optional(),
+      emergencyNumber: z.string().nonempty("emergencyNumber is required").optional(),
+      bloodType: z
+        .enum(["A+", "B+", "O+", "O-", "AB-", "AB+"], {
+          required_error: "Invalid blood type",
+        })
+        .optional(),
+      email: z
+        .string()
+        .nonempty("email is required")
+        .email("Invalid email address"),
+      avatar: z.string().url().optional(),
+      permanentAddress: z.string().optional(),
+      guardian: guardianValidationSchema,
+      profileImg: z.string().url().optional(),
+      AcademicSemister: z.string().optional(),
+      academicDepartment: z.string().optional(),
+    }),
+  }),
+});
 
-export const studentValidation = {
-  CreateStudentValidationSchema
+export const studentValidationSchema = {
+  CreateStudentValidationSchema,
+  updateStudentValidationSchema,
 };

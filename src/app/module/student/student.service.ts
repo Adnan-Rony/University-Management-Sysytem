@@ -4,25 +4,27 @@ import { TStudent } from "./student.interface";
 import { Student } from "./student.model";
 
 const getStudentintoDB = async () => {
-  const result = await Student.find().populate
-  ("AcademicSemister") .populate({
-    path: "academicDepartment",
-    populate:{
-      path: "academicFaculty",
-    }
-  });
- 
+  const result = await Student.find()
+    .populate("AcademicSemister")
+    .populate({
+      path: "academicDepartment",
+      populate: {
+        path: "academicFaculty",
+      },
+    });
+
   return result;
 };
 
 const getsingleStudentIntoDB = async (id: String) => {
-  const result = await Student.findOne({id}).populate
-  ("AcademicSemister") .populate({
-    path: "academicDepartment",
-    populate:{
-      path: "academicFaculty",
-    }
-  });
+  const result = await Student.findOne({ id })
+    .populate("AcademicSemister")
+    .populate({
+      path: "academicDepartment",
+      populate: {
+        path: "academicFaculty",
+      },
+    });
 
   //used aggregate method ********************************
   // const result = await Student.aggregate([{ $match: { id: id } }]);
@@ -56,26 +58,24 @@ const deleteStudentFromDB = async (id: String) => {
     }
 
     await session.commitTransaction(); // Commit the transaction
-    await session.endSession()
+    await session.endSession();
     return deletedStudent; // Return the deleted student document
   } catch (err) {
     await session.abortTransaction(); // Abort the transaction if an error occurs
-    await session.endSession()
-    throw new Error('Session abortt');  //13-10
-  } 
+    await session.endSession();
+    throw new Error("Session abortt"); //13-10
+  }
 };
 
-const updateStudent = async (id: String) => {
-  const result = await Student.findOne({id})
-
+const updateStudentIntoDB = async (id: String, payLoad: Partial<TStudent>) => {
+  const result = await Student.findOneAndUpdate({ id },payLoad);
 
   return result;
 };
-
 
 export const StudentServices = {
   getStudentintoDB,
   getsingleStudentIntoDB,
   deleteStudentFromDB,
-  updateStudent
+  updateStudentIntoDB,
 };
